@@ -1,0 +1,62 @@
+# Creamos una query en el frontend para ser reutilizada.
+query getCharacters {
+  # Esta query esta definida en el Backend
+  characters {
+    info {
+      count
+      pages
+      next
+      prev
+    }
+    results {
+      id
+      name
+      status
+    }
+  }
+  
+  character(id: "2") {
+    id
+    name
+  }
+}
+
+query getCharacter($id: ID!) {
+  character(id: $id) {
+    id
+    name
+    gender
+  }
+}
+
+query getEpisodes {
+  episodes {
+    results {
+      id
+      name
+      created
+    }
+  }
+}
+
+query getEpisode($id: ID!) {
+  episode(id: $id){
+    id
+    name
+    episode
+    characters {
+      id
+      name
+    }
+    created
+  }
+}
+
+{
+  "id": 4
+}
+
+# GraphQL, en conjunto con Apollo, nos permiten posponer la implementación de Redux 
+# hasta que realmente necesitemos usarlo para manejar el estado de la aplicación, y 
+# no de nuestros datos. Ahí es donde creo que sí se luce la simpleza de 
+# los actions y reducers.
